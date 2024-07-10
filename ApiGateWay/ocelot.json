@@ -1,0 +1,103 @@
+{
+  "Routes": [
+    //Authentication api
+    {
+      "UpstreamPathTemplate": "/api/account",
+      "UpstreamHttpMethod": [ "Post" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authenticationwebapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/account"
+    },
+    //customer api gateway
+    {
+      "UpstreamPathTemplate": "/api/Customer",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customerwebapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Customer"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Customer/{customerId}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "customerwebapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Customer/{customerId}"
+    },
+    //product api gateway
+    {
+      "UpstreamPathTemplate": "/api/Product",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productwebapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Product",
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer",
+        "AllowedScopes": []
+      },
+      "RouteClaimsRequirement": {
+        "Role": "Administration"
+      }
+    },
+    {
+      "UpstreamPathTemplate": "/api/Product/{productId}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "productwebapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Product/{productId}"
+    },
+    // order api gateway
+    {
+      "UpstreamPathTemplate": "/api/Order",
+      "UpstreamHttpMethod": [ "Get", "Post", "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderwedapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Order"
+    },
+    {
+      "UpstreamPathTemplate": "/api/Order/{orderId}",
+      "UpstreamHttpMethod": [ "Get", "Delete" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "orderwedapi",
+          "Port": 80
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Order/{orderId}"
+    }
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "http://localhost:8007"
+  }
+
+}
