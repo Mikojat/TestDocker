@@ -11,6 +11,7 @@ builder.Services.AddOcelot(builder.Configuration);
 builder.Services.AddCustomJwtAuthentication();
 
 var app = builder.Build();
+
 await app.UseOcelot();
 
 app.UseAuthentication();
